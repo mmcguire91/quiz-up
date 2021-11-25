@@ -90,11 +90,6 @@ question3: 'A slug\'s blood is green.', true,
               ),
               onPressed: () {
                 //The user picked true.
-                // setState(() {
-                //   scoreKeeper.add(
-                //     Icon(Icons.check, color: Colors.green),
-                //   );
-                // });
                 bool correctAnswer = answers[questionNum];
 
                 if (correctAnswer == true) {

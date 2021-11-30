@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'question.dart';
+import 'quiz_brain.dart';
+
+QuizBrain quizBrain = QuizBrain();
+//initializing the new class and saving it as a variable
 
 void main() => runApp(Quizzler());
 
@@ -28,44 +31,11 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [];
 
-/*
-question1: 'You can lead a cow down stairs but not up stairs.', false,
-question2: 'Approximately one quarter of human bones are in the feet.', true,
-question3: 'A slug\'s blood is green.', true,
-*/
-
-  // List<String> questions = [
-  //   'You can lead a cow down stairs but not up stairs.',
-  //   'Approximately one quarter of human bones are in the feet.',
-  //   'A slug\'s blood is green.',
-  // ];
-
-  // List<bool> answers = [
-  //   false,
-  //   true,
-  //   true,
-  // ];
-
   int questionNum = 0; //keep track of where the user is in the array (List)
 
   // if questionNum > 2 {
   // questionNum[0];
   // }
-
-  List<Question> questionList = [
-    Question(
-      q: 'You can lead a cow down stairs but not up stairs.',
-      a: false,
-    ),
-    Question(
-      q: 'Approximately one quarter of human bones are in the feet.',
-      a: true,
-    ),
-    Question(
-      q: 'A slug\'s blood is green.',
-      a: true,
-    ),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -79,8 +49,11 @@ question3: 'A slug\'s blood is green.', true,
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                questionList[questionNum].questionText,
                 // 'This is where the question text will go.',
+                quizBrain.questionList[questionNum].questionText,
+                //this is calling on the quizBrain local variable that targets the QuizBrain class
+                //the QuizBrain class holds the question list within
+                //questionText is a property of the Question class
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -106,7 +79,8 @@ question3: 'A slug\'s blood is green.', true,
               ),
               onPressed: () {
                 //The user picked true.
-                bool correctAnswer = questionList[questionNum].questionAnswer;
+                bool correctAnswer =
+                    quizBrain.questionList[questionNum].questionAnswer;
 
                 if (correctAnswer == true) {
                   scoreKeeper.add(
@@ -145,7 +119,8 @@ question3: 'A slug\'s blood is green.', true,
               ),
               onPressed: () {
                 //The user picked false.
-                bool correctAnswer = questionList[questionNum].questionAnswer;
+                bool correctAnswer =
+                    quizBrain.questionList[questionNum].questionAnswer;
 
                 if (correctAnswer == false) {
                   scoreKeeper.add(

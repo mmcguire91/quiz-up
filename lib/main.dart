@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'question.dart';
 
 void main() => runApp(Quizzler());
 
@@ -33,23 +34,38 @@ question2: 'Approximately one quarter of human bones are in the feet.', true,
 question3: 'A slug\'s blood is green.', true,
 */
 
-  List<String> questions = [
-    'You can lead a cow down stairs but not up stairs.',
-    'Approximately one quarter of human bones are in the feet.',
-    'A slug\'s blood is green.',
-  ];
+  // List<String> questions = [
+  //   'You can lead a cow down stairs but not up stairs.',
+  //   'Approximately one quarter of human bones are in the feet.',
+  //   'A slug\'s blood is green.',
+  // ];
 
-  List<bool> answers = [
-    false,
-    true,
-    true,
-  ];
+  // List<bool> answers = [
+  //   false,
+  //   true,
+  //   true,
+  // ];
 
   int questionNum = 0; //keep track of where the user is in the array (List)
 
   // if questionNum > 2 {
   // questionNum[0];
   // }
+
+  List<Question> questionList = [
+    Question(
+      q: 'You can lead a cow down stairs but not up stairs.',
+      a: false,
+    ),
+    Question(
+      q: 'Approximately one quarter of human bones are in the feet.',
+      a: true,
+    ),
+    Question(
+      q: 'A slug\'s blood is green.',
+      a: true,
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +79,7 @@ question3: 'A slug\'s blood is green.', true,
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                questions[questionNum],
+                questionList[questionNum].questionText,
                 // 'This is where the question text will go.',
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -90,7 +106,7 @@ question3: 'A slug\'s blood is green.', true,
               ),
               onPressed: () {
                 //The user picked true.
-                bool correctAnswer = answers[questionNum];
+                bool correctAnswer = questionList[questionNum].questionAnswer;
 
                 if (correctAnswer == true) {
                   scoreKeeper.add(
@@ -129,7 +145,7 @@ question3: 'A slug\'s blood is green.', true,
               ),
               onPressed: () {
                 //The user picked false.
-                bool correctAnswer = answers[questionNum];
+                bool correctAnswer = questionList[questionNum].questionAnswer;
 
                 if (correctAnswer == false) {
                   scoreKeeper.add(

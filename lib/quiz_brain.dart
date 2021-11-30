@@ -1,7 +1,11 @@
 import 'question.dart';
 
 class QuizBrain {
-  List<Question> questionList = [
+  int _questionNum = 0;
+  //keep track of where the user is in the array (List)
+
+  List<Question> _questionList = [
+    //made _questionList private so it's unmodifiable outside of this class
     Question(
       q: 'You can lead a cow down stairs but not up stairs.',
       a: false,
@@ -55,4 +59,26 @@ class QuizBrain {
       a: true,
     ),
   ];
+
+  void getNextQuestion() {
+    if (_questionNum < _questionList.length - 1) {
+      _questionNum++;
+    }
+    //if the int of questionNum is less than the total number of questions within the questionList, proceed to the next question
+    //we have to specify "-1" because arrays start at 0
+    else {
+      _questionNum = 0;
+    }
+    //else return to the beginning of the questions
+  }
+  //encapsulating the method to go to the next question
+
+  String getQuestion() {
+    return _questionList[_questionNum].questionText;
+  }
+
+  bool getAnswer() {
+    return _questionList[_questionNum].questionAnswer;
+  }
+  //encapsulating the retrieval of questions and answers inside a function that can be called on outside of this class since _questionList is now private
 }

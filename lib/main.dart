@@ -31,12 +31,6 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [];
 
-  int questionNum = 0; //keep track of where the user is in the array (List)
-
-  // if questionNum > 2 {
-  // questionNum[0];
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -50,10 +44,12 @@ class _QuizPageState extends State<QuizPage> {
             child: Center(
               child: Text(
                 // 'This is where the question text will go.',
-                quizBrain.questionList[questionNum].questionText,
-                //this is calling on the quizBrain local variable that targets the QuizBrain class
+                quizBrain.getQuestion(),
+                //the quizBrain local variable stores the quizBrain class
                 //the QuizBrain class holds the question list within
                 //questionText is a property of the Question class
+                //the list of questions has been made private so we have to call on the non-private method, getQuestion, to retrieve the questionText
+
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -79,8 +75,10 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 //The user picked true.
-                bool correctAnswer =
-                    quizBrain.questionList[questionNum].questionAnswer;
+                bool correctAnswer = quizBrain.getAnswer();
+                //call on the getAnswer method at the int of questionNum inside of the quizBrain local variable
+                //the quizBrain local variable stores the quizBrain class
+                //encapsulated the questionNum and where the user is within the quiz in the quizBrain class, getNextQuestion method so we no longer need to call on questionNum here
 
                 if (correctAnswer == true) {
                   scoreKeeper.add(
@@ -98,7 +96,9 @@ class _QuizPageState extends State<QuizPage> {
                   );
                 }
                 setState(() {
-                  questionNum++;
+                  quizBrain.getNextQuestion();
+                  //call on the getNextQuestion method within the quizBrain local variable
+                  //the quizBrain local variable stores the quizBrain class
                 });
               },
             ),
@@ -119,8 +119,10 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 //The user picked false.
-                bool correctAnswer =
-                    quizBrain.questionList[questionNum].questionAnswer;
+                bool correctAnswer = quizBrain.getAnswer();
+                //call on the getAnswer method at the int of questionNum inside of the quizBrain local variable
+                //the quizBrain local variable stores the quizBrain class
+                //encapsulated the questionNum and where the user is within the quiz in the quizBrain class, getNextQuestion method so we no longer need to call on questionNum here
 
                 if (correctAnswer == false) {
                   scoreKeeper.add(
@@ -138,7 +140,9 @@ class _QuizPageState extends State<QuizPage> {
                   );
                 }
                 setState(() {
-                  questionNum++;
+                  quizBrain.getNextQuestion();
+                  //call on the getNextQuestion method within the quizBrain local variable
+                  //the quizBrain local variable stores the quizBrain class
                 });
               },
             ),

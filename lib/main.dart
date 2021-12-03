@@ -31,6 +31,43 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [];
 
+  void addCheck() {
+    scoreKeeper.add(
+      Icon(
+        Icons.check,
+        color: Colors.green,
+      ),
+    );
+  }
+
+  void addCross() {
+    scoreKeeper.add(
+      Icon(
+        Icons.close,
+        color: Colors.red,
+      ),
+    );
+  }
+
+  void checkAnswer(bool userAnwer) {
+    bool correctAnswer = quizBrain.getAnswer();
+    //call on the getAnswer method at the int of questionNum inside of the quizBrain local variable
+    //the quizBrain local variable stores the quizBrain class
+    //encapsulated the questionNum and where the user is within the quiz in the quizBrain class, getNextQuestion method so we no longer need to call on questionNum here
+    setState(() {
+      if (userAnwer == correctAnswer) {
+        addCheck();
+        //add the correct answer icon
+      } else {
+        addCross();
+        //add the incorrect answer icon
+      }
+      quizBrain.getNextQuestion();
+      //call on the getNextQuestion method within the quizBrain local variable
+      //the quizBrain local variable stores the quizBrain class
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -75,31 +112,8 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 //The user picked true.
-                bool correctAnswer = quizBrain.getAnswer();
-                //call on the getAnswer method at the int of questionNum inside of the quizBrain local variable
-                //the quizBrain local variable stores the quizBrain class
-                //encapsulated the questionNum and where the user is within the quiz in the quizBrain class, getNextQuestion method so we no longer need to call on questionNum here
-
-                if (correctAnswer == true) {
-                  scoreKeeper.add(
-                    Icon(
-                      Icons.check,
-                      color: Colors.green,
-                    ),
-                  );
-                } else {
-                  scoreKeeper.add(
-                    Icon(
-                      Icons.close,
-                      color: Colors.red,
-                    ),
-                  );
-                }
-                setState(() {
-                  quizBrain.getNextQuestion();
-                  //call on the getNextQuestion method within the quizBrain local variable
-                  //the quizBrain local variable stores the quizBrain class
-                });
+                checkAnswer(true);
+                //call on the checkAnswer method for true
               },
             ),
           ),
@@ -109,7 +123,6 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(15.0),
             child: TextButton(
               style: TextButton.styleFrom(backgroundColor: Colors.red),
-              // color: Colors.red,
               child: Text(
                 'False',
                 style: TextStyle(
@@ -119,31 +132,8 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 //The user picked false.
-                bool correctAnswer = quizBrain.getAnswer();
-                //call on the getAnswer method at the int of questionNum inside of the quizBrain local variable
-                //the quizBrain local variable stores the quizBrain class
-                //encapsulated the questionNum and where the user is within the quiz in the quizBrain class, getNextQuestion method so we no longer need to call on questionNum here
-
-                if (correctAnswer == false) {
-                  scoreKeeper.add(
-                    Icon(
-                      Icons.check,
-                      color: Colors.green,
-                    ),
-                  );
-                } else {
-                  scoreKeeper.add(
-                    Icon(
-                      Icons.close,
-                      color: Colors.red,
-                    ),
-                  );
-                }
-                setState(() {
-                  quizBrain.getNextQuestion();
-                  //call on the getNextQuestion method within the quizBrain local variable
-                  //the quizBrain local variable stores the quizBrain class
-                });
+                checkAnswer(false);
+                //call on the checkAnswer method for true
               },
             ),
           ),

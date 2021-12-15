@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'quiz_brain.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 QuizBrain quizBrain = QuizBrain();
 //initializing the new class and saving it as a variable
@@ -55,7 +56,24 @@ class _QuizPageState extends State<QuizPage> {
     //the quizBrain local variable stores the quizBrain class
     //encapsulated the questionNum and where the user is within the quiz in the quizBrain class, getNextQuestion method so we no longer need to call on questionNum here
     setState(() {
-      if (userAnwer == correctAnswer) {
+      if (quizBrain.isFinished()) {
+        Alert(
+          context: context,
+          type: AlertType.error,
+          title: "You have reached the end",
+          desc: "hit the button to restart",
+          buttons: [
+            DialogButton(
+              child: Text('Restart'),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ).show();
+        quizBrain.reset();
+        scoreKeeper = [];
+      } else if (userAnwer == correctAnswer) {
         addCheck();
         //add the correct answer icon
       } else {

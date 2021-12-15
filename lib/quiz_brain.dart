@@ -66,9 +66,9 @@ class QuizBrain {
     }
     //if the int of questionNum is less than the total number of questions within the questionList, proceed to the next question
     //we have to specify "-1" because arrays start at 0
-    else {
-      _questionNum = 0;
-    }
+    // else {
+    //   _questionNum = 0;
+    // }
     //else return to the beginning of the questions
   }
   //encapsulating the method to go to the next question
@@ -81,4 +81,16 @@ class QuizBrain {
     return _questionList[_questionNum].questionAnswer;
   }
   //encapsulating the retrieval of questions and answers inside a function that can be called on outside of this class since _questionList is now private
+
+  bool isFinished() {
+    if (_questionNum == _questionList.length - 1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  void reset() {
+    _questionNum = 0;
+  }
 }
